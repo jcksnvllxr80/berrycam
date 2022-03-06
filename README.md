@@ -1,17 +1,22 @@
 
-
 # BerryCam Support
 
-### Steps to get BerryCam up and running on your Raspberry Pi and iOS device 
+### Steps to get BerryCam up and running on your Raspberry Pi and iOS device
 
-#### Preparation: 
+#### Preparation
+
 [1. What you need](#items-you-will-need) / [2. Getting started](#useful-guides-to-get-started)  / [3. Camera set-up](#setting-up-the-camera)
-#### Capturing images: 
+
+#### Capturing images
+
 [4. The BerryCam script](#installing-and-running-the-berrycam-script) / [5. Using the BerryCam app](#using-the-berrycam-app-to-capture-images) / [6. Troubleshooting](#troubleshooting)
-#### Additional setup:
+
+#### Additional setup
+
 [7. Autostart BerryCam on boot](#other-things-to-try) / [8. Copying images from your Raspberry Pi using a shared directory](#other-things-to-try)
 
 #### Raspistill version of the BerryCam.py script
+
 BerryCam originally used Raspistill to capture images. However there is a new version which uses the popular PiCamera package. Both versions are available within this Repo, and designed to work with the latest version of the BerryCam app. **If you wish to use the PiCamera version, please update your BerryCam app from the App Store to the latest version.**
 
 Whilst the code is different in areas, set up remains the same process, although the raspistill version is now called `berryCam-raspistill.py`
@@ -54,7 +59,7 @@ Learn about Raspberry Pi OS, included software, and how to adjust some key setti
 It's recommended you take a look at the resources here as you will need to use Terminal and some basic commands to install BerryCam and run the Python script.
 
 [Other Frequently Asked Questions](https://www.raspberrypi.org/documentation/faqs/)
-A wide range of information related to the hardware and software to get up and running with the various models of Raspberry Pi. 
+A wide range of information related to the hardware and software to get up and running with the various models of Raspberry Pi.
 
 [Raspberry Pi OS](https://downloads.raspberrypi.org/raspios_full_armhf/release_notes.txt) is well maintained and receives regular updates. This may change the instructions here from time to time. If you notice any differences, please let me know by raising an issue and I'll update the documentation, with thanks in advance.
 
@@ -63,16 +68,17 @@ A wide range of information related to the hardware and software to get up and r
 ---
 
 # Setting up the camera
+
 > You will need to physically connect the Raspberry Pi camera module using the supplied ribbon cable. This is generally the same process for all models although the connector may be positioned slightly differently, or in the case of Raspberry Pi Zero, require a different connector ribbon cable. If you've done this already, again you may wish to [skip this part](#installing-and-running-the-berrycam-script)
 
 [Getting started with the Camera Module](https://projects.raspberrypi.org/en/projects/getting-started-with-picamera)
 Learn how to connect the Raspberry Pi Camera Module to your Raspberry Pi in preparation for use with BerryCam
 
 [Basic usage of raspistill](https://www.raspberrypi.org/documentation/usage/camera/raspicam/raspistill.md)
-BerryCam uses raspistill to capture images on the Raspberry Pi. You won't need this reference guide to use BerryCam yet it is handy if you want to learn more and take things even further. 
+BerryCam uses raspistill to capture images on the Raspberry Pi. You won't need this reference guide to use BerryCam yet it is handy if you want to learn more and take things even further.
 
 [Basic usage of PiCamera](https://projects.raspberrypi.org/en/projects/getting-started-with-picamera/4)
-For more information on PiCamera and how you can use it within your own projects, refer to this getting started guide on the Raspberry Pi website. 
+For more information on PiCamera and how you can use it within your own projects, refer to this getting started guide on the Raspberry Pi website.
 
 [Full API documentation for PiCamera](https://picamera.readthedocs.io/)
 A complete guide to the command reference and some example recipes, when you decide to create your own capture scripts.
@@ -120,11 +126,12 @@ Start LXTerminal on the Raspberry Pi using the icon (a small black window icon w
 
 ![\[Raspberry Pi OS Terminal\]](https://raw.githubusercontent.com/fotosyn/berrycam/master/Assets/raspberry-pi-os-terminal.png)
 
-First of all, we will need to find the IP address of the Raspberry Pi on your network. To do this type in 
+First of all, we will need to find the IP address of the Raspberry Pi on your network. To do this type in
 
 ```
 ifconfig
-``` 
+```
+
 and press return. This will return quite a bit of information. the only part you will need is highlighted in light grey (to show you where to look) in the screenshow below.
 
 ![\[Raspberry Pi OS Terminal IP Address\]](https://raw.githubusercontent.com/fotosyn/berrycam/master/Assets/raspberry-pi-os-ipaddress.png)
@@ -147,36 +154,37 @@ Connecting using PuTTy:
 
 ![\[PuTTy Terminal\]](https://raw.githubusercontent.com/fotosyn/berrycam/master/Assets/putty-terminal.jpg)
 
-To connect, enter 
+To connect, enter
 
 ```
 ssh pi@YOUR_IP_ADDRESS
-``` 
+```
+
 replacing YOUR_IP_ADDRESS with the number you took note of and enter your password when prompted. There will be no typing input when entering the password on some cases, so be sure to focus on entering the right keystrokes.
 
 #### Download and install BerryCam onto your Raspberry Pi
 
 First of all make sure you're in the home directory for the user you are logged in as. This will normally be 'pi' and is located `/home/pi/`
 
-You can double check this using the 
+You can double check this using the
 
 ```
 pwd
-``` 
+```
+
 command. If you find you are in a different directory simply use:
 
 ```
 cd /home/pi
 ```
 
-or 
+or
 
 ```
 cd /home/<your-user-name>/
 ```
 
 Next, we need to clone the BerryCam script into your home folder. Within the terminal, simply type:
-
 
 ```
 git clone https://github.com/fotosyn/berrycam.git
@@ -219,7 +227,6 @@ python3 --version
 
 If you have a version lower than this, we recommend you check the [Troubleshooting](#troubleshooting) guide.
 
-
 #### Check you have PiCamera installed
 
 If you are using the Raspbian or RaspberryPi OS distro, you probably have picamera installed by default. You can find out simply by starting Python and trying to import picamera
@@ -234,7 +241,7 @@ If you get no error, you’ve already got picamera installed. If you don’t hav
 sudo apt-get install python-picamera python3-picamera
 ```
 
-####  Running the BerryCam Python script on your Raspberry Pi
+#### Running the BerryCam Python script on your Raspberry Pi
 
 BerryCam needs to be run as a Python process to provide the necessary links to allow the BerryCam iOS app to trigger the camera, provide previews and save files. To run simply enter:
 
@@ -253,7 +260,6 @@ You can close terminal and as long as the Raspberry Pi has power will continue t
 
 If you experience any problems at this point, please check [Troubleshooting](#troubleshooting)
 
-
 #### Updating the BerryCam.py script
 
 If you've already started using the BerryCam app with the BerryCam script (thankyou!) - it's recommended you update to the latest version in the repo. This is easy if you've cloned it from this repo by simply using the command
@@ -271,8 +277,7 @@ The [GitHub desktop tool](https://desktop.github.com) is another easy to use opt
 
 ## Using the BerryCam app to capture images
 
-> Make sure you have downloaded and installed the BerryCam app onto your iOS device, and that both devices are connected on the same local network (generally your cellular connection won't work. Wifi will be easiest). 
-
+> Make sure you have downloaded and installed the BerryCam app onto your iOS device, and that both devices are connected on the same local network (generally your cellular connection won't work. Wifi will be easiest).
 
 [![Download on the App Store](https://raw.githubusercontent.com/fotosyn/berrycam/master/Assets/app-store-badge.png)](https://apps.apple.com/app/berrycam-take-images-with-a-raspberry-pi-camera/id687071023)
 
@@ -284,19 +289,19 @@ To set up the connection on the iOS App, tap the settings button (gear/cog icon)
 
 Once complete, select **Done** and you will be returned to the main screen. After a brief pause, BerryCam will detect your Raspberry Pi and the capture button will change to green. If this does not happen, check all of the steps above and make sure the IP address entered is correct.
 
-#### You can now start capturing images! 
+#### You can now start capturing images
 
-Simply press the large green capture (camera) button. After a short pause, the image will then appear in your iOS device. You can experiment with various capture parameters by revisiting the settings panel and updating. There's no need to worry about losing any captures you make. 
+Simply press the large green capture (camera) button. After a short pause, the image will then appear in your iOS device. You can experiment with various capture parameters by revisiting the settings panel and updating. There's no need to worry about losing any captures you make.
 
-Images are saved locally to the Pi, and can be accessed from within BerryCam, either by tapping the IP address shown on larger display iOS devices and iPads, or by going back into settings (gear/cog menu) and selecting 'Review images on Raspberry Pi' 
+Images are saved locally to the Pi, and can be accessed from within BerryCam, either by tapping the IP address shown on larger display iOS devices and iPads, or by going back into settings (gear/cog menu) and selecting 'Review images on Raspberry Pi'
 
 You can also access the address directly on a browser on a device on the same local network by entering the address in the format below:
 
 ```
 http://YOUR_IP_ADDRESS:8000/berrycam/
-``` 
+```
 
-You can also save or share the currently captured image directly from the iOS device using the share button. 
+You can also save or share the currently captured image directly from the iOS device using the share button.
 
 BerryCam is a quick and easy way to unlock experimentation with the Raspberry Pi camera modules. Try combinations of image effects, exposure controls and white balance to create some striking photographs!
 
@@ -304,51 +309,63 @@ BerryCam is a quick and easy way to unlock experimentation with the Raspberry Pi
 
 ---
 
-# Install as a service that runs at boot
+### Install as a service that runs at boot
+
 #### Install the gpg key and then the repo
-```
+
+```bash
 curl -s --compressed "https://jcksnvllxr80.github.io/aw_rpi_ppa_repo/KEY.gpg" | sudo apt-key add -
 sudo curl -s --compressed -o /etc/apt/sources.list.d/my_list_file.list "https://jcksnvllxr80.github.io/aw_rpi_ppa_repo/my_list_file.list"
 sudo apt update
 ```
 
 #### Install the service
-```
+
+```bash
 sudo apt install berrycam
 ```
 
-#### Uninstall the service
+#### Updating the berrycam service
+
+```bash
+apt install --only-upgrade berrycam
 ```
+
+#### Uninstall the service
+
+```bash
 sudo apt remove berrycam -y
 ```
 
 #### Starting, stopping, restarting, or getting the service status
-1. start berryCam
-```
+
+##### start berryCam
+
+```bash
 sudo systemctl start berryCam
 ```
 
-2. stop berryCam
-```
+##### stop berryCam
+
+```bash
 sudo systemctl stop berryCam
 ```
 
-3. restart berryCam
-```
+##### restart berryCam
+
+```bash
 sudo systemctl restart berryCam
 ```
 
-4. get berryCam service status
-```
+##### get berryCam service status
+
+```bash
 sudo systemctl status berryCam
 ```
 
-#### Updating the berrycam service
-1. apt install --only-upgrade berrycam
-
 # Troubleshooting
 
-If you are running an earlier version of Python3, pre version 3.3 then you will encounter a problem with the flush=true parameter in the `berryCam.py` script. 
+If you are running an earlier version of Python3, pre version 3.3 then you will encounter a problem with the flush=true parameter in the `berryCam.py` script.
 
 ### Check your version of Python3
 
@@ -360,12 +377,11 @@ python3 --version
 
 If this returns less than 3.7.0 then there are a few things you can do.
 
-
-#### Things you can do:
+#### Things you can do
 
 **1. Upgrade your Raspberry Pi OS**
 
-You could install a newer version of Raspberry Pi OS which has newer versions of Python. This is definitely the most direct route to consider if you're blowing the dust off a trusty Pi that's been sitting in the cupboard. 
+You could install a newer version of Raspberry Pi OS which has newer versions of Python. This is definitely the most direct route to consider if you're blowing the dust off a trusty Pi that's been sitting in the cupboard.
 
 See [Setting up your Raspberry Pi](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up) to get the latest version of Raspberry Pi OS and flash to your SD card.
 
@@ -378,12 +394,15 @@ Alternatively, you can update your version of Python3. Be aware that this will a
 ```
 sudo su
 ```
+
 ```
 cd /usr/src
 ```
+
 ```
 wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz
 ```
+
 ```
 tar -xf Python-3.7.0.tgz
 ```
@@ -393,6 +412,7 @@ tar -xf Python-3.7.0.tgz
 ```
 apt-get update
 ```
+
 ```
 apt-get install -y build-essential tk-dev libncurses5-dev libncursesw5-dev libreadline6-dev libdb5.3-dev libgdbm-dev libsqlite3-dev libssl-dev libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev libffi-dev
 ```
@@ -402,9 +422,11 @@ apt-get install -y build-essential tk-dev libncurses5-dev libncursesw5-dev libre
 ```
 cd Python-3.7.0
 ```
+
 ```
 ./configure --enable-optimizations
 ```
+
 ```
 make altinstall
 ```
@@ -421,7 +443,7 @@ ln -s /usr/local/bin/python3.7 /usr/local/bin/python3
 python3 --version
 ```
 
-Thanks to [Samx18](https://samx18.io/blog/2018/09/05/python3_raspberrypi.html) for the original guide to this detail. **Perform a reboot of the Pi to be doubly sure that this has been applied.** 
+Thanks to [Samx18](https://samx18.io/blog/2018/09/05/python3_raspberrypi.html) for the original guide to this detail. **Perform a reboot of the Pi to be doubly sure that this has been applied.**
 
 **You should then be able to launch BerryCam using the command:**
 
@@ -431,7 +453,7 @@ sudo nohup python3 berryCam.py > berryCam.log & tail -f berryCam.log
 
 ### Image Capture Failing with HQ Camera Module
 
-In some cases, you may encounter an out of component error when using PiCamera and the HQ Camera Module. 
+In some cases, you may encounter an out of component error when using PiCamera and the HQ Camera Module.
 
 ```
 mmal: mmal_vc_component_enable: failed to enable component: ENOSPC
@@ -450,7 +472,6 @@ An updated version of [Raspberry Pi OS](https://downloads.raspberrypi.org/raspio
 ![\[Adjust GPU Memory in raspi-config\]](https://raw.githubusercontent.com/fotosyn/berrycam/master/Assets/raspi-config-screen.png)
 
 Select `<Ok>` to continue, and then reboot the Raspberry Pi. This should address any issues related to image capture.
-
 
 [Back to top](#top)
 
@@ -479,14 +500,12 @@ nohup python3 berryCam.py > berryCam.log & tail -f berryCam.log
 
 Save this file `CTRL x` confirming with `Y` and `Enter` then restart your Raspberry Pi. If this has been set up correctly and your BerryCam app should connect when you supply the correct IP address in the app.
 
-
 ### Copying images from your Raspberry Pi using a shared directory
 
-You can share your Raspberry Pi folders with other devices on your network. A popular choice for MacOS users is [Netatalk](http://netatalk.sourceforge.net), with [Samba](https://www.samba.org) recommended for Windows users. 
+You can share your Raspberry Pi folders with other devices on your network. A popular choice for MacOS users is [Netatalk](http://netatalk.sourceforge.net), with [Samba](https://www.samba.org) recommended for Windows users.
 
 There are a number of guides online to do this, for [MacOS](https://spellfoundry.com/docs/copying-files-to-and-from-raspberry-pi-and-mac/) users (Netatalk) and [Windows](http://coffeetime.solutions/share-folder-raspberry-pi-access-windows/) users (Samba)
 
 Once completed, and if you connect with your Pi's login credentials, you will see the shared folders with your captured images within the `berrycam` folder.
 
 [Back to top](#top)
-
